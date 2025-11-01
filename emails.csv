@@ -1,0 +1,4 @@
+id,sender,subject,body
+1,alice@company.com,Leave request,"I would like to take leave on 2025-09-28"
+2,bob@company.com,IT issue,"My laptop cannot connect to wifi"
+3,charlie@client.com,New leave request,"I would like to take day off on”

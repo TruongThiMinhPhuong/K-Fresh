@@ -1,0 +1,12 @@
+[
+  {
+    "id": 1,
+    "sender": "alice@company.com",
+    "type": "leave_request"
+  },
+  {
+    "id": 3,
+    "sender": "charlie@client.com",
+    "type": "leave_request"
+  }
+]
