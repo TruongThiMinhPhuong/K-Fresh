@@ -8,5 +8,25 @@
     "id": 3,
     "sender": "charlie@client.com",
     "type": "leave_request"
+  },
+  {
+    "id": 5,
+    "sender": "edward@company.com",
+    "type": "leave_request"
+  },
+  {
+    "id": 6,
+    "sender": "frank@company.com",
+    "type": "leave_request"
+  },
+  {
+    "id": 8,
+    "sender": "helen@company.com",
+    "type": "leave_request"
+  },
+  {
+    "id": 10,
+    "sender": "julia@company.com",
+    "type": "leave_request"
   }
 ]

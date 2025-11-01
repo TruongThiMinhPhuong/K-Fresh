@@ -1,4 +1,11 @@
 id,sender,subject,body
-1,alice@company.com,Leave request,"I would like to take leave on 2025-09-28"
-2,bob@company.com,IT issue,"My laptop cannot connect to wifi"
-3,charlie@client.com,New leave request,"I would like to take day off on”
+1,alice@company.com,Leave request,"I would like to take leave on 2025-09-28."
+2,bob@company.com,IT issue,"My laptop cannot connect to wifi."
+3,charlie@client.com,New leave request,"I would like to take a day off on 2025-09-30."
+4,diana@company.com,Meeting reminder,"Don’t forget the meeting tomorrow at 9AM."
+5,edward@company.com,Time off request,"Can I get time off next Monday for personal reasons?"
+6,frank@company.com,Sick leave,"I'm feeling unwell and need sick leave today."
+7,grace@company.com,Project update,"The report draft will be ready by this Friday."
+8,helen@company.com,Vacation plan,"I plan to take vacation from 2025-12-01 to 2025-12-10."
+9,ian@company.com,New hire setup,"Please prepare a laptop for the new employee."
+10,julia@company.com,Leave request,"I would like to take leave tomorrow for family reasons."

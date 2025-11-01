@@ -1,37 +1,59 @@
 import csv
 import json
 
-def loc_email_xin_nghi(file_csv, file_ket_qua):
-    """
-    Hàm đọc file CSV và lọc ra các email xin nghỉ phép
-    """
-    danh_sach_xin_nghi = []
-    
-    try:
-        with open(file_csv, 'r', encoding='utf-8') as file:
-            doc_gia = csv.DictReader(file)
-            
-            for dong in doc_gia:
-                chuoi_kiem_tra = f"{dong['subject']} {dong['body']}".lower()
-                
-                if 'leave' in chuoi_kiem_tra:
-                    danh_sach_xin_nghi.append({
-                        "id": int(dong['id']),
-                        "sender": dong['sender'],
-                        "type": "leave_request"
-                    })
+# Function lọc email xin nghỉ phép từ file CSV chứa dữ liệu email,
+def filterEmails(input_file_csv, output_file_json, keywords):
+    try:   
+        leave_request_list = findLeaveRequestEmails(input_file_csv, keywords)
         
-    
-        with open(file_ket_qua, 'w', encoding='utf-8') as file_json:
-            json.dump(danh_sach_xin_nghi, file_json, indent=2, ensure_ascii=False)
+        with open(output_file_json, 'w', encoding='utf-8') as file_json:
+            json.dump(leave_request_list, file_json, indent=2, ensure_ascii=False)
             
-        print(f" Đã tìm thấy {len(danh_sach_xin_nghi)} email xin nghỉ phép")
-        print(f" Kết quả đã được lưu vào: {file_ket_qua}")
+        print(f" Đã tìm thấy {len(leave_request_list)} email xin nghỉ phép")
+        print(f" Kết quả đã được lưu vào: {output_file_json}")
         
     except FileNotFoundError:
         print(" Lỗi: Không tìm thấy file emails.csv")
     except Exception as e:
         print(f"Lỗi: {e}")
 
+# Hàm tìm email xin nghỉ phép
+def findLeaveRequestEmails(input_file_csv, keywords):
+    """
+    Hàm đọc file CSV và trả về danh sách email
+    """
+    leave_request_list = []
+    try:
+        with open(input_file_csv, 'r', encoding='utf-8') as file:
+            csvEmailRows = csv.DictReader(file)
+            for emailRow in csvEmailRows:
+                subJectAndBody = f"{emailRow['subject']} {emailRow['body']}".lower()
+                if isContainedKeywords(subJectAndBody, keywords):
+                    leave_request_list.append({
+                        "id": int(emailRow['id']),
+                        "sender": emailRow['sender'],
+                        "type": "leave_request"
+                    })
+        return leave_request_list
+    
+    except FileNotFoundError:
+        print(" Lỗi: Không tìm thấy file emails.csv")
+        return []
+    except Exception as e:
+        print(f"Lỗi: {e}")
+        return []
+
+
+# Hàm kiểm tra từ khóa trong subject và body có chứa keywords (leave, day off, ...)
+def isContainedKeywords(subJectAndBody, keywords):
+    for keyword in keywords:
+        if keyword in subJectAndBody:
+            return True
+    return False
+
+
 if __name__ == "__main__":
-    loc_email_xin_nghi("emails.csv", "leave_requests.json")
+    # Gọi hàm lọc email xin nghỉ phép
+    
+    keywords = ['leave', 'day off', 'time off', 'vacation', 'sick leave']
+    filterEmails("emails.csv", "leave_requests.json", keywords)
